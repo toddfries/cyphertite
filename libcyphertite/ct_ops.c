@@ -320,8 +320,9 @@ ct_extract_complete_file_read(struct ct_global_state *state,
 		    trans->tr_fl_node ?
 		    trans->tr_fl_node->fn_fullname  : "unknown",
 		    shat);
-		ct_fatal(state, errstr, trans->tr_errno);
+		CWARN("trans->tr_errno=%d: %s",trans->tr_errno, errstr);
 		free(errstr);
+		trans->tr_fl_node->fn_skip_file = 1;
 		return (0);
 	}
 
